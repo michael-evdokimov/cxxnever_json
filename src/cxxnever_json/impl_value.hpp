@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <optional>
+#include <cstdint>
 #include "impl_read.hpp"
 #include "impl_iterator.hpp"
 #include "impl_validator.hpp"
