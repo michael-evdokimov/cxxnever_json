@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <cstring>
 
 
 namespace cxxnever::json::impl
