@@ -95,6 +95,10 @@ TEST(test, convert_float)
 
 	v = value_t {"190e-1"};
 	EXPECT_EQ(19, int(*v));
+
+	v = value_t {"19e+100"};
+	EXPECT_EQ(0, int(*v));
+	EXPECT_EQ(std::nullopt, v.read<int>());
 }
 
 TEST(test, convert_string)

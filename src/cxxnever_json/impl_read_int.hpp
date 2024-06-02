@@ -63,8 +63,13 @@ struct reader_int_t
 			++p;
 			while (p != end && '0' <= *p && *p <= '9')
 				exp = exp * 10 + (*p++ - '0') * exp_sign;
-			while (exp > 0)
+			while (exp > 0) {
+				T saved = value;
 				value *= 10, exp--;
+				if constexpr(T(0.1) == 0)
+						if (value / 10 != saved)
+							return false;
+			}
 			while (exp < 0) {
 				if constexpr(T(0.1) == 0)
 					if (value % 10)
