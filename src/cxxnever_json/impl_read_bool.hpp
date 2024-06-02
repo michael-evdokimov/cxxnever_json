@@ -7,15 +7,27 @@ namespace cxxnever::json::impl
 
 struct reader_bool_t
 {
+	bool read_const(std::string_view name, std::string_view input)
+	{
+		if (name.size() <= input.size()) {
+			if (memcmp(&name[0], &input[0], name.size()) != 0)
+				return false;
+			if (name.size() == input.size())
+				return true;
+			if (strchr(",}]\x20\t\r\n", input[name.size()]))
+				return true;
+		}
+
+		return false;
+	}
+
 	bool read(bool& value, std::string_view input)
 	{
-		if (input.starts_with("true"))
-			if (input.size()==4 || strchr(",}]\x20\t\n", input[4]))
-				return (value = true), true;
+		if (read_const("true", input))
+			return value = true, true;
 
-		if (input.starts_with("false"))
-			if (input.size()==5 || strchr(",}]\x20\t\n", input[5]))
-				return (value = false), true;
+		if (read_const("false", input))
+			return value = false, true;
 
 		return false;
 	}
