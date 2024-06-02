@@ -1,0 +1,9 @@
+Source: libcxxneverjson
+Section: libs
+Priority: optional
+Maintainer: Michael Evdokimov <michael.evdokimov@gmail.com>
+Build-Depends: dpkg-dev, debhelper-compat (=13)
+
+Package: libcxxneverjson
+Architecture: any
+Description: Parsing json c++ header-only library
